@@ -124,8 +124,6 @@ function init() {
   doorLight = new THREE.PointLight("#ff7d46");
   doorLight.position.set(0, 2.1, 3);
   doorLight.castShadow = true;
-  // doorLight.shadow.mapSize.width = 256;
-  // doorLight.shadow.mapSize.height = 256;
   doorLight.shadow.mapSize.set(256, 256);
   doorLight.shadow.camera.far = 7;
   house.add(doorLight);
@@ -158,8 +156,6 @@ function init() {
   // Directional light
   dayAndNightLight = new THREE.DirectionalLight("#b9d5ff", 0.12);
   dayAndNightLight.castShadow = true;
-  // dayAndNightLight.shadow.mapSize.width = 256;
-  // dayAndNightLight.shadow.mapSize.height = 256;
   dayAndNightLight.shadow.mapSize.set(256, 256);
   dayAndNightLight.shadow.camera.far = 15;
   scene.add(dayAndNightLight);
@@ -237,15 +233,13 @@ function GUIs() {
 
   gui.add(spinControl, "isSpinning").name("Spin light");
 }
+
 function toggleDayNight() {
   isNight = !isNight;
 
   if (isNight) {
     // Night mode
-    scene.background = new THREE.Color("#000000");
-    // ambientLight.color.set("#404040");
-    // ambientLight.intensity = 0.08;
-
+    scene.background = new THREE.Color(0x0a0f29);
     dayAndNightLight.position.set(-5, 6.5, 5);
 
     dayAndNightLight.color.set("#8a8ac7");
@@ -254,10 +248,7 @@ function toggleDayNight() {
     doorLight.intensity = 4; // Make the door light more prominent at night
   } else {
     // Day mode
-    scene.background = new THREE.Color("#87ceeb");
-    ambientLight.color.set("#b9d5ff");
-    ambientLight.intensity = 0.12;
-
+    scene.background = textureLoader.load("./Texture/Daylight.jpg");
     dayAndNightLight.position.set(5, 6.5, -5);
 
     dayAndNightLight.color.set("#ffffff");
